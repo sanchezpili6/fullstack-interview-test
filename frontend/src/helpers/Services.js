@@ -41,9 +41,14 @@ const close_pull_request = async (pull_request_number) => {
 }
 
 const create_pull_request = async (pull_request_title, pull_request_body, pull_request_branch) => {
-    const response = await Apis.get(`/create_pull_request/`,
-        {headers: {'pull_request_title': pull_request_title, 'pull_request_body': pull_request_body,
-                'pull_request_branch': pull_request_branch}});
+    const response = await Apis.post(`/create_pull_request/`,
+         {'pull_request_title': pull_request_title, 'pull_request_body': pull_request_body,
+                'pull_request_branch': pull_request_branch});
+    return response.data;
+}
+
+const merge_pull_request = async (pull_request_number) => {
+    const response = await Apis.post(`/merge_pull_request/`,{'pull_request_number': pull_request_number});
     return response.data;
 }
 

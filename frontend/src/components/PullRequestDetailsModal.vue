@@ -1,5 +1,5 @@
 <template>
-  <v-card light color="#BDD6D0">
+  <v-card light color="#BDD6D0" min-width="500px">
     <v-card-title>
       {{pull_request.title}}
       <v-spacer></v-spacer>
@@ -15,9 +15,11 @@
           v-html="markdownToHTML(pull_request.body)"
       ></div>
     </v-card-text>
-    <v-card-actions v-show="pull_request.status == 'merged'">
+    <v-card-actions v-show="pull_request.status != 'closed'" >
       <v-spacer></v-spacer>
-      <v-btn color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
+      <v-btn  color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn color="#fda855" @click=closePullRequest>Merge Pull Request</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>

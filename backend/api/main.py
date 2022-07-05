@@ -104,26 +104,29 @@ def get_pull_request():
 def close_pull_request():
     pull_request_number = request.headers.get('pull_request_number')
     pull_request = repo.get_pull(int(pull_request_number))
-    pull_request.merge()
+    pull_request.close()
     return jsonify({'status': 'success'})
 
 
 @main_blueprint.route('/create_pull_request/', methods=['POST'])
 def create_pull_request():
-    pull_request_title = request.headers.get('pull_request_title')
-    pull_request_body = request.headers.get('pull_request_body')
-    pull_request_branch = request.headers.get('pull_request_branch')
+    content = request.get_json()
+    pull_request_title = content.get('pull_request_title')
+    pull_request_body = content.get('pull_request_body')
+    pull_request_branch = content.get('pull_request_branch')
     pull_request = repo.create_pull(title=pull_request_title, body=pull_request_body, head=pull_request_branch,
-                                    base=repo.default_branch)
-    return jsonify({'number': pull_request.number, 'title': pull_request.title,
-                    'author': pull_request.user.login, 'date': pull_request.created_at,
-                    'status': pull_request.state, 'body': pull_request.body, 'merged': pull_request.merged})
+                                    base='master')
+    return jsonify({'status': 'success', 'pull_request_number': pull_request.number})
 
 
 @main_blueprint.route('/merge_pull_request/', methods=['POST'])
 def merge_pull_request():
-    pull_request_number = request.headers.get('pull_request_number')
+    content = request.get_json()
+    pull_request_number = content.get('pull_request_number')
+    # merge pull request
     pull_request = repo.get_pull(int(pull_request_number))
     pull_request.merge()
-    return jsonify({'status': 'success'})
+    return jsonify({'http_response': 'success'})
 
+
+print(dir(repo.get_pull))
