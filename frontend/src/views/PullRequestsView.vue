@@ -1,5 +1,5 @@
 <template>
-  <v-card class="main">
+  <div class="main">
     <v-tabs>
       <v-tab>
         Open
@@ -7,7 +7,7 @@
       <v-tab>
         Closed
       </v-tab>
-      <v-tab-item>
+      <v-tab-item style="background-color: #f5f7ff">
         <v-card class="prs-card">
           <v-card-title>
             <v-text-field
@@ -30,7 +30,7 @@
           ></v-data-table>
         </v-card>
       </v-tab-item>
-      <v-tab-item>
+      <v-tab-item style="background-color: #f5f7ff">
         <v-card class="prs-card">
           <v-card-title>
             <v-text-field
@@ -55,15 +55,20 @@
       </v-tab-item>
     </v-tabs>
     <v-overlay v-model="showModal">
-      <PullRequestDetailsModal :pull_request_number="selectedPR" v-on:showModal="getMessageFromChild"></PullRequestDetailsModal>
+      <PullRequestDetailsModal :pull_request_number="selectedPR" v-on:showModal="getMessageFromDetailsModal"></PullRequestDetailsModal>
     </v-overlay>
-  </v-card>
+    <v-overlay v-model="showCreatePR">
+      <CreatePRModal v-on:showCreatePR="getMessageFromCreatePRModal"></CreatePRModal>
+    </v-overlay>
+    <v-btn color="#fda855" x-large class="create-pr" @click="showCreatePR=!showCreatePR">Create Pull Request</v-btn>
+  </div>
 </template>
 
 <script>
 import {get_open_pull_requests} from "@/helpers/Services";
 import {get_closed_pull_requests} from "@/helpers/Services";
 import PullRequestDetailsModal from "@/components/PullRequestDetailsModal";
+import CreatePRModal from "@/components/CreatePRModal";
 export default {
   name: "PullRequestsView.vue",
   mounted() {
@@ -71,7 +76,8 @@ export default {
     this.getClosedPullRequests()
   },
   components: {
-    PullRequestDetailsModal
+    PullRequestDetailsModal,
+    CreatePRModal,
   },
   data () {
     return {
@@ -86,6 +92,7 @@ export default {
       openPullRequests: [],
       closedPullRequests: [],
       showModal: false,
+      showCreatePR: false,
       selectedPR: 0
     }
   },
@@ -100,8 +107,11 @@ export default {
       this.selectedPR = e.number
       this.showModal = true
     },
-    getMessageFromChild( message ) {
+    getMessageFromDetailsModal( message ) {
       this.showModal = message
+    },
+    getMessageFromCreatePRModal( message ) {
+      this.showCreatePR = message
     }
   },
 }
@@ -121,5 +131,11 @@ export default {
     right:0px;
     bottom:0px;
     left:0px;
+  }
+  .create-pr{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
   }
 </style>

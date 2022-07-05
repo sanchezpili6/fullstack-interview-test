@@ -12,14 +12,20 @@
       <p>{{pull_request.date}}</p>
       <div
           class="body"
-          v-html="markdowntoHTML(pull_request.body)"
+          v-html="markdownToHTML(pull_request.body)"
       ></div>
     </v-card-text>
+    <v-card-actions v-show="pull_request.status == 'merged'">
+      <v-spacer></v-spacer>
+      <v-btn color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
 import {get_pull_request} from "@/helpers/Services";
+import {close_pull_request} from "@/helpers/Services";
 import {marked} from "marked";
 export default {
   name: "PullRequestDetailsModal.vue",
@@ -36,10 +42,14 @@ export default {
     async getPullRequest(){
       this.pull_request = await get_pull_request(this.pull_request_number)
     },
+    async closePullRequest(){
+      await close_pull_request(this.pull_request_number)
+      this.closeModal()
+    },
     closeModal(){
       this.$emit("showModal",false)
     },
-    markdowntoHTML(markdown){
+    markdownToHTML(markdown){
       const createDOMPurify = require('dompurify');
       const DOMPurify = createDOMPurify();
       let sanitizedHTML = DOMPurify.sanitize(marked(markdown))
@@ -52,8 +62,9 @@ export default {
 <style scoped>
   .body{
     min-width: 300px;
-    max-height: 800px;
-    max-width: 600px;
+    max-width: 700px;
+    max-height: 650px;
     padding: 10px;
+    overflow-y: scroll;
   }
 </style>
