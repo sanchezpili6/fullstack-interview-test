@@ -2,7 +2,7 @@
   <div>
     <v-app-bar dense>
       <v-toolbar-items>
-        <v-btn to="/branches">
+        <v-btn to="/">
           Branches
         </v-btn>
         <v-btn to="/pull-requests">

@@ -17,8 +17,6 @@
     </v-card-text>
     <v-card-actions v-show="pull_request.status != 'closed'" >
       <v-spacer></v-spacer>
-      <v-btn  color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
-      <v-spacer></v-spacer>
       <v-btn color="#fda855" @click=mergePullRequest>Merge Pull Request</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
@@ -27,7 +25,6 @@
 
 <script>
 import {get_pull_request} from "@/helpers/Services";
-import {close_pull_request} from "@/helpers/Services";
 import {merge_pull_request} from "@/helpers/Services";
 import {marked} from "marked";
 export default {
@@ -44,10 +41,6 @@ export default {
   methods:{
     async getPullRequest(){
       this.pull_request = await get_pull_request(this.pull_request_number)
-    },
-    async closePullRequest(){
-      await close_pull_request(this.pull_request.number)
-      this.closeModal()
     },
     async mergePullRequest(){
       await merge_pull_request(this.pull_request.number)

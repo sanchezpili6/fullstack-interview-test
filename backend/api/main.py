@@ -100,14 +100,6 @@ def get_pull_request():
                     'status': pull_request.state, 'body': pull_request.body, 'merged': pull_request.merged})
 
 
-@main_blueprint.route('/close_pull_request/', methods=['POST'])
-def close_pull_request():
-    pull_request_number = request.headers.get('pull_request_number')
-    pull_request = repo.get_pull(int(pull_request_number))
-    pull_request.edit(state='closed')
-    return jsonify({'status': 'closed'})
-
-
 @main_blueprint.route('/create_pull_request/', methods=['POST'])
 def create_pull_request():
     content = request.get_json()

@@ -35,11 +35,6 @@ const get_pull_request = async (pull_request_number) => {
     return response.data;
 }
 
-const close_pull_request = async (pull_request_number) => {
-    const response = await Apis.post(`/close_pull_request/`, {'pull_request_number': pull_request_number});
-    return response.data;
-}
-
 const create_pull_request = async (pull_request_title, pull_request_body, pull_request_branch) => {
     const response = await Apis.post(`/create_pull_request/`,
          {'pull_request_title': pull_request_title, 'pull_request_body': pull_request_body,
@@ -60,7 +55,6 @@ export {
     get_open_pull_requests,
     get_closed_pull_requests,
     get_pull_request,
-    close_pull_request,
     create_pull_request,
     merge_pull_request
 }

@@ -1,6 +1,60 @@
 # fullstack-interview-test
 Interview test for fullstack Software Engineers
 
+## Geting started
+
+After cloning the project, go to the backend folder and follow this steps:
+
+1. create a .env file that contains:
+
+
+    GITHUB_TOKEN = Your Github token
+
+
+    GITHUB_REPO = the name of your repository
+
+    
+2. run `pip install -r requirements.txt`
+3. run `python app.py`
+
+
+Note: you can check the instructions to get your github token in [here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
+
+
+Now go to the frontend folder and follow this steps:
+
+1. run `npm install`
+2. run `npm run serve`
+
+
+## Views
+
+- Branches
+- Branch details
+- Commit details modal
+- Pull requests
+  - Open pull requests
+  - Closed pull requests
+- Pull request details
+- Create pull request modal
+
+
+## Endpoints
+
+| Endpoint                  | Method | Description                  | Parameters                                                             |
+|---------------------------|--------|------------------------------|------------------------------------------------------------------------|
+| /get_branches             | GET    | Get all branches             |                                                                        |
+| /get_branch               | GET    | Get branch details           | branch_name                                                            |
+| /get_commits/             | GET    | Get all branch commits       | headers: 'branch_name'                                                 |
+| /get_commit               | GET    | Get commit details           | headers: 'commit_sha'                                                  |
+| /get_open_pull_requests   | GET    | Get all open pull requests   |                                                                        |
+| /get_closed_pull_requests | GET    | Get all closed pull requests |                                                                        |
+| /get_pull_request         | GET    | Get pull request details     | headers: 'pull_request_number'                                         |
+| /create_pull_request      | POST   | Create pull request          | data: 'pull_request_title', 'pull_request_body', 'pull_request_branch' |
+| /merge_pull_request       | POST   | Merges and closes open PR    | headers: 'pull_request_number'                                         |
+
+
+
 ## Welcome!
 If you're reading this, it means we're interested in working with you and solving amazing and difficult problems in real-estate tech in Mexico.
 
