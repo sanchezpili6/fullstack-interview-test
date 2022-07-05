@@ -36,7 +36,7 @@ const get_pull_request = async (pull_request_number) => {
 }
 
 const close_pull_request = async (pull_request_number) => {
-    const response = await Apis.get(`/close_pull_request/`, {headers: {'pull_request_number': pull_request_number}});
+    const response = await Apis.post(`/close_pull_request/`, {'pull_request_number': pull_request_number});
     return response.data;
 }
 
@@ -61,5 +61,6 @@ export {
     get_closed_pull_requests,
     get_pull_request,
     close_pull_request,
-    create_pull_request
+    create_pull_request,
+    merge_pull_request
 }
