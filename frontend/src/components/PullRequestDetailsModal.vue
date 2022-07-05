@@ -1,5 +1,5 @@
 <template>
-  <v-card light color="#BDD6D0">
+  <v-card light color="#BDD6D0" min-width="500px">
     <v-card-title>
       {{pull_request.title}}
       <v-spacer></v-spacer>
@@ -15,9 +15,11 @@
           v-html="markdownToHTML(pull_request.body)"
       ></div>
     </v-card-text>
-    <v-card-actions v-show="pull_request.status == 'merged'">
+    <v-card-actions v-show="pull_request.status != 'closed'" >
       <v-spacer></v-spacer>
-      <v-btn color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
+      <v-btn  color="#fda855" @click=closePullRequest>Close Pull Request</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn color="#fda855" @click=mergePullRequest>Merge Pull Request</v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>
@@ -26,6 +28,7 @@
 <script>
 import {get_pull_request} from "@/helpers/Services";
 import {close_pull_request} from "@/helpers/Services";
+import {merge_pull_request} from "@/helpers/Services";
 import {marked} from "marked";
 export default {
   name: "PullRequestDetailsModal.vue",
@@ -43,7 +46,11 @@ export default {
       this.pull_request = await get_pull_request(this.pull_request_number)
     },
     async closePullRequest(){
-      await close_pull_request(this.pull_request_number)
+      await close_pull_request(this.pull_request.number)
+      this.closeModal()
+    },
+    async mergePullRequest(){
+      await merge_pull_request(this.pull_request.number)
       this.closeModal()
     },
     closeModal(){
