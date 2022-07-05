@@ -133,7 +133,7 @@ export default {
     left:0px;
   }
   .create-pr{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     margin: 10px;
