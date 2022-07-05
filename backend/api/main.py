@@ -113,7 +113,17 @@ def create_pull_request():
     pull_request_title = request.headers.get('pull_request_title')
     pull_request_body = request.headers.get('pull_request_body')
     pull_request_branch = request.headers.get('pull_request_branch')
-    pull_request = repo.create_pull(title=pull_request_title, body=pull_request_body, base=pull_request_branch)
+    pull_request = repo.create_pull(title=pull_request_title, body=pull_request_body, head=pull_request_branch,
+                                    base=repo.default_branch)
     return jsonify({'number': pull_request.number, 'title': pull_request.title,
                     'author': pull_request.user.login, 'date': pull_request.created_at,
                     'status': pull_request.state, 'body': pull_request.body, 'merged': pull_request.merged})
+
+
+@main_blueprint.route('/merge_pull_request/', methods=['POST'])
+def merge_pull_request():
+    pull_request_number = request.headers.get('pull_request_number')
+    pull_request = repo.get_pull(int(pull_request_number))
+    pull_request.merge()
+    return jsonify({'status': 'success'})
+
