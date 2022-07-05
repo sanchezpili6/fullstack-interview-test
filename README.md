@@ -38,6 +38,23 @@ Now go to the frontend folder and follow this steps:
 - Pull request details
 - Create pull request modal
 
+
+## Endpoints
+
+| Endpoint                  | Method | Description                  | Parameters                                                             |
+|---------------------------|--------|------------------------------|------------------------------------------------------------------------|
+| /get_branches             | GET    | Get all branches             |                                                                        |
+| /get_branch               | GET    | Get branch details           | branch_name                                                            |
+| /get_commits/             | GET    | Get all branch commits       | headers: 'branch_name'                                                 |
+| /get_commit               | GET    | Get commit details           | headers: 'commit_sha'                                                  |
+| /get_open_pull_requests   | GET    | Get all open pull requests   |                                                                        |
+| /get_closed_pull_requests | GET    | Get all closed pull requests |                                                                        |
+| /get_pull_request         | GET    | Get pull request details     | headers: 'pull_request_number'                                         |
+| /create_pull_request      | POST   | Create pull request          | data: 'pull_request_title', 'pull_request_body', 'pull_request_branch' |
+| /merge_pull_request       | POST   | Merges and closes open PR    | headers: 'pull_request_number'                                         |
+
+
+
 ## Welcome!
 If you're reading this, it means we're interested in working with you and solving amazing and difficult problems in real-estate tech in Mexico.
 
