@@ -104,7 +104,7 @@ def get_pull_request():
 def close_pull_request():
     pull_request_number = request.headers.get('pull_request_number')
     pull_request = repo.get_pull(int(pull_request_number))
-    pull_request.edit(status='closed')
+    pull_request.edit(state='closed')
     return jsonify({'status': 'closed'})
 
 
@@ -125,7 +125,7 @@ def merge_pull_request():
     pull_request_number = content.get('pull_request_number')
     pull_request = repo.get_pull(int(pull_request_number))
     pull_request.merge()
-    pull_request.edit(status='merged')
+    pull_request.edit(state='merged')
     return jsonify({'status': 'success'})
 
 
