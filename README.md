@@ -27,18 +27,6 @@ Now go to the frontend folder and follow this steps:
 2. run `npm run serve`
 
 
-## Views
-
-- Branches
-- Branch details
-- Commit details modal
-- Pull requests
-  - Open pull requests
-  - Closed pull requests
-- Pull request details
-- Create pull request modal
-
-
 ## Endpoints
 
 | Endpoint                  | Method | Description                  | Parameters                                                             |
@@ -53,6 +41,24 @@ Now go to the frontend folder and follow this steps:
 | /create_pull_request      | POST   | Create pull request          | data: 'pull_request_title', 'pull_request_body', 'pull_request_branch' |
 | /merge_pull_request       | POST   | Merges and closes open PR    | headers: 'pull_request_number'                                         |
 
+
+## Views
+
+- Branches
+![image](https://user-images.githubusercontent.com/37568592/177251677-860b333d-1fcf-4a4d-a241-bc9fd508ac27.png)
+- Branch details
+![image](https://user-images.githubusercontent.com/37568592/177251717-26702ba8-6f87-4d8a-b886-fc68dded779d.png)
+- Commit details modal
+![image](https://user-images.githubusercontent.com/37568592/177251963-a908d466-7af0-4e1e-b53b-3484882e8643.png)
+- Pull requests
+  - Open pull requests
+  ![image](https://user-images.githubusercontent.com/37568592/177252016-2591b399-55dc-4a2f-93b9-3819405b4fc6.png)
+  - Closed pull requests
+  ![image](https://user-images.githubusercontent.com/37568592/177252050-68ea8766-751c-44a9-bfeb-1d54afc7edfa.png)
+- Pull request details
+![image](https://user-images.githubusercontent.com/37568592/177252094-a055bc51-36cb-4bae-b88d-2e294b3fa1e5.png)
+- Create pull request modal
+![image](https://user-images.githubusercontent.com/37568592/177252113-02d45017-cc45-4ad6-adb0-4165ca6bee10.png)
 
 
 ## Welcome!
