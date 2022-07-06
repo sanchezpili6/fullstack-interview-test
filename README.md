@@ -22,6 +22,8 @@ Note: you can check the instructions to get your github token in [here](https://
  
  `make front` 
  
+4. the project is now running on `http://localhost:8080/`
+ 
 
 ## Endpoints
 
