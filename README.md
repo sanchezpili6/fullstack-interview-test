@@ -3,29 +3,25 @@ Interview test for fullstack Software Engineers
 
 ## Geting started
 
-After cloning the project, go to the backend folder and follow this steps:
-
-1. create a .env file that contains:
-
+1. After cloning the project, go to the backend folder and create a .env file that contains:
 
     GITHUB_TOKEN = Your Github token
 
 
     GITHUB_REPO = the name of your repository
-
     
-2. run `pip install -r requirements.txt`
-3. run `python app.py`
-
-
 Note: you can check the instructions to get your github token in [here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
+2. return to the project's base directory
 
-Now go to the frontend folder and follow this steps:
+3. in two separate terminal windows, run: 
 
-1. run `npm install`
-2. run `npm run serve`
-
+ `make back`
+ 
+ and 
+ 
+ `make front` 
+ 
 
 ## Endpoints
 
